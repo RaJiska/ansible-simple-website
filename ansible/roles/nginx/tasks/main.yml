@@ -19,6 +19,8 @@
     owner: root
     group: root
     mode: 0644
+  notify:
+    - Restart Nginx
 
 - name: Configure Virtual Host - Site Enabled Symlink
   file:
@@ -27,5 +29,3 @@
     state: link
   notify:
     - Restart Nginx
-    
-  
