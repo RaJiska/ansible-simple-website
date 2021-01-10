@@ -1,0 +1,18 @@
+---
+- name: Setup App
+  git:
+    repo: https://github.com/banago/simple-php-website.git
+    dest: "/var/www/{{ website_identifier }}/html"
+    force: yes
+
+- name: Set Base Permissions
+  file:
+    path: "/var/www/{{ website_identifier }}/html"
+    state: directory
+    owner: "{{ fpm_user }}"
+    group: "{{ nginx_group }}"
+    mode: 0750
+    recurse: yes
+
+- name: Set Files Permissions
+  command: "find /var/www/{{ website_identifier }}/html -type f -exec /bin/chmod 640 {} +"

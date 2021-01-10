@@ -1,0 +1,31 @@
+---
+- name: Install Nginx
+  apt: pkg=nginx state=latest update_cache=true
+  notify:
+    - Start Nginx
+
+- name: Nginx Virtual Host Log Folder
+  file:
+    path: /var/log/nginx/{{ website_identifier }}
+    state: directory
+    owner: root
+    group: adm
+    mode: 0755
+
+- name: Configure Virtual Host - Site Available
+  template:
+    src: host.conf
+    dest: "/etc/nginx/sites-available/{{ website_identifier }}.conf"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Configure Virtual Host - Site Enabled Symlink
+  file:
+    src: "/etc/nginx/sites-available/{{ website_identifier }}.conf"
+    dest: "/etc/nginx/sites-enabled/{{ website_identifier }}.conf"
+    state: link
+  notify:
+    - Restart Nginx
+    
+  

@@ -1,0 +1,10 @@
+---
+website_identifier: hello.world
+website_hosts: [ hello.world, www.hello.world ]
+
+fpm_user: hello-world
+fpm_group: hello-world
+nginx_user: www-data
+nginx_group: www-data
+
+php_version: 7.4

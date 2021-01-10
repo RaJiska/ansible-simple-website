@@ -1,0 +1,18 @@
+---
+- name: Create FPM Group
+  group: name={{ fpm_group }}
+
+- name: Create FPM User 
+  user: name={{ fpm_user }} group={{ fpm_group }} home=/home/{{ fpm_user }}
+
+- name: Install FPM
+  apt: pkg=php{{ php_version }}-fpm state=latest update_cache=true
+  notify:
+    - Start FPM
+
+- name: Setup FPM Config for Website
+  template:
+    src: pool.conf
+    dest: "/etc/php/{{ php_version }}/fpm/pool.d/{{ website_identifier }}.conf"
+  notify:
+    - Restart FPM
