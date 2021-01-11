@@ -14,7 +14,7 @@ Make sure to add the domain `hello.world` redirecting to `10.0.0.10` in your `/e
 You may achieve this with the following command:
 
 ```
-echo -e '10.0.0.10\thello.world' |sudo tee -a /etc/hosts
+$ echo -e '10.0.0.10\thello.world' |sudo tee -a /etc/hosts
 ```
 
-Fire up your browser and browser the address `http://hello.world`. You should be able to access the test website.
+Fire up your web browser and browse to the address `http://hello.world`. You should be able to access the test website.
